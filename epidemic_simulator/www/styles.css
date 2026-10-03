@@ -1,0 +1,143 @@
+/* =============================================================================
+   styles.css -- Pastel Soft / Minimalist Cream theme, ported from the
+   project's HTML mockup. Loaded automatically by Shiny from www/.
+   ============================================================================= */
+
+body, .content-wrapper {
+  background: #F8F9FA;
+  color: #2D3748;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  background: #E6F7ED;
+  color: #2E7D4E;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+/* ---- Sidebar navigation ---- */
+.sidebar-nav .nav-item {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 4px;
+  color: #718096;
+  font-size: 13px;
+  text-decoration: none;
+}
+.sidebar-nav .nav-item.active-page {
+  background: #EBF8FF;
+  color: #1A365D;
+  font-weight: 600;
+}
+
+/* ---- Panels / cards ---- */
+.panel-card {
+  background: #FFFFFF;
+  border: 1px solid #EDF2F7;
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 18px;
+}
+.panel-card h2, .panel-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+.tag-sim {
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  background: #D2E6FF; color: #1A365D; margin-left: 8px;
+}
+.tag-real {
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  background: #E6F7ED; color: #2E7D4E; margin-left: 8px;
+}
+
+/* ---- Status cards (Dashboard) ---- */
+.status-card {
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+.status-card .label { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.status-card .value { font-size: 26px; font-weight: 700; }
+.status-card .sub   { font-size: 12px; margin-top: 4px; opacity: 0.85; }
+
+.card-infected   { background: #FFEAEA; color: #C53030; }
+.card-recovered  { background: #E6F7ED; color: #2E7D4E; }
+.card-vaccination{ background: #D2E6FF; color: #1A365D; }
+.card-r0         { background: #FFF8E7; color: #B7791F; }
+
+/* ---- Disease picker ---- */
+.disease-pill {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1.5px solid #EDF2F7;
+  background: #FFFFFF;
+  font-size: 13px;
+  margin: 4px;
+  cursor: pointer;
+}
+.disease-pill.selected { border-color: #C6E2FF; background: #EBF8FF; font-weight: 600; }
+.disease-pill.aids-note { color: #718096; font-style: italic; }
+
+.insight-box {
+  background: #FFFBEB; color: #B7791F; border-radius: 12px;
+  padding: 14px 16px; font-size: 13px; margin-top: 14px; line-height: 1.5;
+}
+.data-source-note { font-size: 12px; color: #718096; margin-top: 10px; }
+
+/* ---- Buttons ---- */
+.btn-pastel-primary {
+  background: #C6E2FF !important; color: #1A365D !important; border: none !important;
+  font-weight: 600 !important; border-radius: 10px !important;
+}
+.btn-pastel-ghost {
+  background: #FFFFFF !important; color: #2D3748 !important;
+  border: 1px solid #EDF2F7 !important; border-radius: 10px !important;
+}
+
+/* ---- Region ranking list ---- */
+.region-row { display: flex; align-items: center; gap: 12px; padding: 10px 2px; border-bottom: 1px solid #EDF2F7; }
+.region-row:last-child { border-bottom: none; }
+.region-name { width: 100px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+.region-bar-track { flex: 1; height: 8px; background: #F0F4F8; border-radius: 999px; overflow: hidden; }
+.region-bar-fill { height: 100%; border-radius: 999px; }
+.region-count { width: 64px; text-align: right; font-size: 12px; color: #718096; font-weight: 600; }
+
+/* ---- Chatbot ---- */
+.chat-window { background: #FFFFFF; border: 1px solid #EDF2F7; border-radius: 16px; overflow: hidden; }
+.chat-header { background: #E0E7FF; padding: 14px 18px; font-weight: 600; font-size: 14px; }
+.chat-body { padding: 16px; height: 420px; overflow-y: auto; background: #FCFCFD; }
+.bubble { padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; margin-bottom: 10px; max-width: 75%; }
+.bubble-user { background: #E0F2FE; color: #0369A1; margin-left: auto; border-bottom-right-radius: 4px; }
+.bubble-bot  { background: #F3F4F6; color: #374151; margin-right: auto; border-bottom-left-radius: 4px; }
+
+/* ---- Avatar builder ---- */
+.avatar-preview {
+  width: 110px; height: 110px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; margin: 0 auto 16px auto; position: relative;
+}
+.avatar-accessory { position: absolute; bottom: -2px; right: -2px; font-size: 26px; }
+.avatar-option-btn { font-size: 20px; padding: 8px 10px; border-radius: 10px; border: 1.5px solid #EDF2F7; background: #fff; margin: 2px; }
+.avatar-option-btn.selected { border-color: #C6E2FF; background: #EBF8FF; }
+
+/* ---- Map theme switch ---- */
+.map-theme-switch { display: inline-flex; background: #EBF8FF; border: 1px solid #EDF2F7; border-radius: 999px; padding: 3px; }
+.map-theme-switch .btn { border-radius: 999px !important; font-size: 12px !important; }

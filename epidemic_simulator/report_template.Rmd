@@ -1,0 +1,85 @@
+---
+title: "Epidemic Simulation Report"
+output: pdf_document
+params:
+  report: NULL
+always_allow_html: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+report <- params$report
+library(ggplot2)
+library(knitr)
+```
+
+**Disease:** `r report$metadata$disease`  **Model:** `r report$metadata$model`  **Generated:** `r report$metadata$generated_at`
+
+---
+
+## Simulation Parameters
+
+```{r}
+if (!is.null(report$sim_data)) {
+  param_df <- data.frame(
+    Parameter = c("Transmission rate (beta)", "Recovery rate (gamma)", "Population",
+                   "Vaccination coverage", "Initial infected", "Basic reproduction number (R0)"),
+    Value = c(
+      report$parameters$transmission_rate_beta,
+      report$parameters$recovery_rate_gamma,
+      format(report$parameters$population, big.mark = ","),
+      paste0(report$parameters$vaccination_coverage_pct, "%"),
+      report$parameters$initial_infected,
+      report$parameters$basic_reproduction_number_R0
+    )
+  )
+  kable(param_df)
+} else {
+  cat(report$parameters$note)
+}
+```
+
+## Epidemic Curve
+
+```{r, fig.width=6.4, fig.height=3.2}
+if (!is.null(report$sim_data)) {
+  df <- report$sim_data
+  has_E <- "E" %in% names(df)
+  plot_df <- data.frame(day = df$day, Susceptible = df$S, Infected = df$I, Recovered = df$R)
+  plot_long <- reshape(plot_df, direction = "long", varying = list(2:4),
+                        v.names = "value", timevar = "compartment",
+                        times = c("Susceptible", "Infected", "Recovered"))
+  ggplot(plot_long, aes(x = day, y = value, color = compartment)) +
+    geom_line(linewidth = 1) +
+    scale_color_manual(values = c(Susceptible = "#B7791F", Infected = "#3182CE", Recovered = "#2E7D4E")) +
+    labs(x = "Day", y = "People", color = NULL,
+         title = paste("Simulated Epidemic Curve --", report$metadata$disease, paste0("(", report$metadata$model, ")"))) +
+    theme_minimal(base_size = 10) +
+    theme(legend.position = "top")
+} else {
+  cat("No simulated curve is generated for", report$metadata$disease, "-- see the note below.")
+}
+```
+
+## Key Results
+
+```{r}
+result_df <- data.frame(
+  Metric = names(report$results),
+  Value = vapply(report$results, function(v) paste(v, collapse = "; "), character(1))
+)
+kable(result_df)
+```
+
+## Real-World Comparison
+
+`r report$real_world_reference$note`
+
+Source type: **`r report$real_world_reference$source`**  ·  Fetched/generated at: `r report$real_world_reference$fetched_at`
+
+---
+
+> **Note:** This report contains SIMULATED results generated from user-set parameters using a compartmental
+> epidemic model (SIR/SEIR/SIRS). It is a scenario projection, not a verified real-world forecast.
+> Real-world reference figures are cited from their original source and are kept separate from the
+> simulation outputs above.
